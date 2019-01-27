@@ -47,6 +47,7 @@ class App:
                 self.explosion2.play()
     def on_loop(self, timedelta_millis):
         self.world.move_enemies(timedelta_millis)
+        self.world.update_bomb_slots()
         # self.world.print_enemies()
     def on_render(self, timedelta_millis):
         BLUE = (0,0,255)
@@ -61,9 +62,14 @@ class App:
         # self.screen.blit(self.enemy, (500,400))
         self.graphics.draw_background()
         self.graphics.draw_enemy_timeline(570, 5, 700, 45)
+        self.graphics.draw_bomb_queued_slots()
+        self.graphics.draw_bomb_armed_slots()
+        self.graphics.draw_queued_bombs()
+        self.graphics.draw_armed_bombs()
         # self.graphics.draw_path(self.world.get_path(0))
         self.graphics.draw_enemies()
         self.graphics.draw_text(str(self.clock.tick()), 60,30)
+        self.graphics.draw_text("Gummi Ghost Guests", 3, 3)
         self.graphics.update()
 
     def on_cleanup(self):

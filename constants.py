@@ -6,6 +6,45 @@ ENEMY_BLUE_IMG = 'images/enemy02.png'
 ENEMY_GREEN_IMG = 'images/enemy03.png'
 ENEMY_RED_IMG = 'images/enemy04.png'
 
+BOMBS = (
+    'images/bombs/bomb04.png',
+    'images/bombs/bomb03.png',
+    'images/bombs/bomb02.png',
+    'images/bombs/bomb01.png'
+)
+
+BOMB_FRAG_TOPS = (
+    'images/bombs/bomb04scraptop.png',
+    'images/bombs/bomb03scraptop.png',
+    'images/bombs/bomb02scraptop.png',
+    'images/bombs/bomb01scraptop.png'
+)
+
+BOMB_FRAG_BOTTOMS = (
+    'images/bombs/bomb04scrapbottom.png',
+    'images/bombs/bomb03scrapbottom.png',
+    'images/bombs/bomb02scrapbottom.png',
+    'images/bombs/bomb01scrapbottom.png'
+)
+
+BOMB_FRAG_LEFTS = (
+    'images/bombs/bomb04scrapleft.png',
+    'images/bombs/bomb03scrapleft.png',
+    'images/bombs/bomb02scrapleft.png',
+    'images/bombs/bomb01scrapleft.png'
+)
+
+BOMB_FRAG_RIGHTS = (
+    'images/bombs/bomb04scrapright.png',
+    'images/bombs/bomb03scrapright.png',
+    'images/bombs/bomb02scrapright.png',
+    'images/bombs/bomb01scrapright.png'
+)
+
+BOMB_BLAST = 'images/bombs/explosion.png'
+
+
+
 # data
 ENEMY_PATH = 'data/path01.txt'
 
@@ -26,6 +65,23 @@ CLASS_RED = 0
 CLASS_GREEN = 1
 CLASS_BLUE = 2
 CLASS_YELLOW = 3
+
+# bomb max_time
+BOMB_MAX_TIMES = (
+    5, 6, 7, 8
+)
+
+BOMB_BLAST_RADII = (
+    10, 30, 60, 100
+)
+
+QUEUED_BOMB_SLOTS_COUNT = 3
+ARMED_BOMB_SLOTS_COUNT = 5
+
+BOMB_QUEUE_SIZE = (84, 84)
+BOMB_ARMED_SIZE = (64, 64)
+
+
 
 # class colors
 CLASS_COLORS = (

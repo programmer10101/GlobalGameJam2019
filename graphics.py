@@ -53,6 +53,30 @@ class Graphics(object):
         self.enemy_sprites[constants.ENEMY_GREEN_IMG][constants.RIGHT] = pygame.transform.flip(enemy_green, True, False)
         self.enemy_sprites[constants.ENEMY_RED_IMG][constants.RIGHT] = pygame.transform.flip(enemy_red, True, False)
 
+        self.bomb_explosion = pygame.image.load(constants.BOMB_BLAST).convert_alpha()
+        self.bomb_sprites = [[] for x in range(len(constants.BOMBS))]
+        self.bomb_frag_tops = [[] for x in range(len(constants.BOMB_FRAG_TOPS))]
+        self.bomb_frag_bottoms = [[] for x in range(len(constants.BOMB_FRAG_BOTTOMS))]
+        self.bomb_frag_lefts = [[] for x in range(len(constants.BOMB_FRAG_LEFTS))]
+        self.bomb_frag_rights = [[] for x in range(len(constants.BOMB_FRAG_RIGHTS))]
+
+        for i, filename in enumerate(constants.BOMBS):
+            self.bomb_sprites[i] = pygame.image.load(filename).convert_alpha()
+
+        for i, filename in enumerate(constants.BOMB_FRAG_TOPS):
+            self.bomb_frag_tops[i] = pygame.image.load(filename).convert_alpha()
+
+        for i, filename in enumerate(constants.BOMB_FRAG_BOTTOMS):
+            self.bomb_frag_bottoms[i] = pygame.image.load(filename).convert_alpha()
+
+        for i, filename in enumerate(constants.BOMB_FRAG_LEFTS):
+            self.bomb_frag_lefts[i] = pygame.image.load(filename).convert_alpha()
+
+        for i, filename in enumerate(constants.BOMB_FRAG_RIGHTS):
+            self.bomb_frag_rights[i]   = pygame.image.load(filename).convert_alpha()
+
+
+
     def set_screen(self, screen):
         self.screen = screen
 
@@ -99,13 +123,38 @@ class Graphics(object):
                 cx = int(a * width) + left
                 pygame.draw.circle(self.screen, e.color, (cx, cy), r)
 
-
-
-
     def draw_enemies(self):
         enemies = self.world.get_enemies()
         for enemy in enemies:
             self.draw_enemy(enemy)
+
+    def draw_bomb_queued_slots(self, color=constants.ORANGE):
+        bomb_queued_areas = [slot.area for slot in self.world.bomb_queued_slots]
+        for rect in bomb_queued_areas:
+            pygame.draw.rect(self.screen, color, rect)
+
+    def draw_bomb_armed_slots(self, color=constants.GREEN):
+        bomb_armed_areas = [slot.area for slot in self.world.bomb_armed_slots]
+        for rect in bomb_armed_areas:
+            pygame.draw.rect(self.screen, color, rect)
+
+    def draw_bomb(self, bomb, location, size=(64, 64)):
+        img = self.bomb_sprites[bomb.kind]
+        img = pygame.transform.scale(img, size)
+        self.screen.blit(img, location)
+
+    def draw_queued_bombs(self):
+        for slot in self.world.bomb_queued_slots:
+            if not slot.bomb is None:
+                x, y, w, h = slot.area
+                self.draw_bomb(slot.bomb, (x, y), constants.BOMB_QUEUE_SIZE)
+
+    def draw_armed_bombs(self):
+        for slot in self.world.bomb_armed_slots:
+            if not slot.bomb is None:
+                x, y, w, h = slot.area
+                self.draw_bomb(slot.bomb, (x, y), constants.BOMB_ARMED_SIZE)
+
 
     def update(self):
         pygame.display.update()

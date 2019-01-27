@@ -13,3 +13,7 @@ class Bomb(object):
         self.state = Bomb.PLANNED
         self.kind = constants.CLASS_RED
         self.color = constants.CLASS_COLORS[self.kind]
+        self.location = None
+        self.max_time = constants.BOMB_MAX_TIMES[self.kind]
+        self.time_to_explosion = 3.5
+        self.blast_radius = constants.BOMB_BLAST_RADII[self.kind]
